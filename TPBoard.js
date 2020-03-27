@@ -6,34 +6,55 @@ class Board extends React.Component {
     super();
     this.state = {
       data: Array(9).fill(null),
-      won:0,
-      gameOver:false
+      xWin:0,
+      oWin:0,
+      gameOver:false,
+      isX:true
     };
   }
   handleClick = (event, index) => {
 
     event.preventDefault();
-
+    
     if (this.state.data[index] === null) {
       const data = this.state.data;
-      data[index] = "X";
+      this.state.isX? data[index] = "X" : data[index] = "O"
       this.setState({
-        data: data
+        data: data,
+        isX:!this.state.isX
       });
     }
-    this.gameOver(event)
-    
+    const winner =this.gameWinner()
+    if(winner==="X"){
+     this.setState({xWin:this.state.xWin+1,gameOver:true})
+          setTimeout(()=>{ this.setState({data: Array(9).fill(null),gameOver:false,isX:true})},2000)
+    }
+    else if(winner==="O")
+    {
+       this.setState({oWin:this.state.oWin+1,gameOver:true})
+          setTimeout(()=>{ this.setState({data: Array(9).fill(null),gameOver:false,isX:true})},2000)
+    }
+    else{
+
+    }
+     if(this.handleAllClicked())
+    {
+      this.setState({gameOver:true})
+       setTimeout(()=>{ this.setState({data: Array(9).fill(null),gameOver:false,isX:true})},2000)
+    }
+
   }
   handleRestart=()=>{
     this.setState({
        data: Array(9).fill(null),
        gameOver:false,
-       won:0
+       xWin:0,
+       oWin:0
     })
   }
-  gameOver=(event)=>
+  gameWinner=()=>
   {
-    event.preventDefault()
+    
     const rows = [
         [0, 1, 2],
         [3, 4, 5],
@@ -48,21 +69,49 @@ class Board extends React.Component {
     
     for (let i = 0; i < rows.length; i++) {
         const [a, b, c] = rows[i]
-        if (data[a] === "X" && data[b] === "X" && data[c] === "X") {
-          this.setState({won:this.state.won+1,gameOver:true})
-          setTimeout(()=>{ this.setState({data: Array(9).fill(null),gameOver:false})},1000)
-      }
+        if (data[a] && data[a] === data[b] && data[a] === data[c]) {
+         return data[a]
+        }
     }
    
   }
-
+  handleAllClicked()
+  {
+    const data=this.state.data
+    const count=0;
+    for(var i=0;i<data.length;i++)
+    {
+      if(data[i]!==null)
+      {
+        count++;
+      }
+    }
+    if(count===9)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
   render() {
+    const winner=this.gameWinner()
     
-    const msg=this.state.gameOver?"Game Completed ":'Lets play...'
+    const status
+     if (winner) {
+            status = `The winner is: ${winner}!`
+        } else if(!winner && this.handleAllClicked()) {
+           status = 'Game drawn!'
+        } else {
+            status = `It is ${(this.state.isX ? 'X' : 'O')}'s turn.`
+        }
+    
+    
     return (
       <div>
-        {msg}
-       <p>No of Wins:{this.state.won}</p>
+        {status}
+       <p>---No of Wins---<br/>X:{this.state.xWin}-- O:{this.state.oWin}</p>
 
         <div class="board-row">
           <Box
