@@ -109,11 +109,12 @@ class Board extends React.Component {
     
     
     return (
-      <div>
+      <div >
         {status}
+        
        <p>---No of Wins---<br/>X:{this.state.xWin}-- O:{this.state.oWin}</p>
-
-        <div class="board-row">
+         <div>
+        <div className="board-row">
           <Box
             handleClick={() => this.handleClick(event, 0)}
             value={this.state.data[0]}
@@ -130,7 +131,7 @@ class Board extends React.Component {
             disabled={this.state.gameOver?"disabled":''}
           />
         </div>
-        <div class="board-row">
+        <div className="board-row">
           <Box
             handleClick={() => this.handleClick(event, 3)}
             value={this.state.data[3]}
@@ -147,7 +148,7 @@ class Board extends React.Component {
             disabled={this.state.gameOver?"disabled":''}
           />
         </div>
-        <div class="board-row">
+        <div className="board-row">
           <Box
             handleClick={() => this.handleClick(event, 6)}
             value={this.state.data[6]}
@@ -164,6 +165,8 @@ class Board extends React.Component {
             disabled={this.state.gameOver?"disabled":''}
           />
         </div>
+        </div>
+       
         <button onClick={this.handleRestart}>New Game</button>
       </div>
     );
