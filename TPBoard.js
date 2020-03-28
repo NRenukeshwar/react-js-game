@@ -151,16 +151,13 @@ class Board extends React.Component {
         <div className="row" style={{padding:"10px", display: "flex",alignItems: "center"}} >
         
           <table border="1" className="scoreBoard offset-1 col-10 offset-sm-2 col-sm-3">
-            <thead>
               <tr>
                 <th colSpan="2" className="text-info">
                   ScoreBoard
                 </th>
               </tr>
-            </thead>
-            <tbody>
               <tr>
-                <td><b>X</b></td>
+                <td style={{width:"50%"}}><b>X</b></td>
                 <td><b>O</b></td>
               </tr>
               <tr className="font-weight-bold">
@@ -171,7 +168,7 @@ class Board extends React.Component {
                   {this.state.oWin==0?"--":this.state.oWin}
                 </td>
               </tr>
-            </tbody>
+            
           </table>
       
           <div className="col-10 offset-1 offset-sm-0 col-sm-6" style={{padding:"15px"}}>
