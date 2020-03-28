@@ -1,7 +1,7 @@
 import React from "react";
-import Box from "./SPBox";
+import Box from "./Box";
 
-class Board extends React.Component {
+class SPBoard extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -26,9 +26,9 @@ class Board extends React.Component {
   }
   handleRestart=()=>{
     this.setState({
-       data: Array(9).fill(null),
-       gameOver:false,
-       won:0
+      data: Array(9).fill(null),
+      gameOver:false,
+      won:0
     })
   }
   gameOver=(event)=>
@@ -47,77 +47,59 @@ class Board extends React.Component {
     const data=this.state.data
     
     for (let i = 0; i < rows.length; i++) {
-        const [a, b, c] = rows[i]
-        if (data[a] === "X" && data[b] === "X" && data[c] === "X") {
-          this.setState({won:this.state.won+1,gameOver:true})
-          setTimeout(()=>{ this.setState({data: Array(9).fill(null),gameOver:false})},1000)
+      const [a, b, c] = rows[i]
+      if (data[a] === "X" && data[b] === "X" && data[c] === "X") {
+        this.setState({won:this.state.won+1,gameOver:true})
+        setTimeout(()=>{ this.setState({data: Array(9).fill(null),gameOver:false})},1000)
       }
     }
    
   }
+  
+  renderBox=(index)=>{
+    return(
+    <Box
+        handleClick={() => this.handleClick(event, index)}
+        value={this.state.data[index]}
+        disabled={this.state.gameOver?"disabled":''}
+    />
+    )
+  }
 
   render() {
     
-    const msg=this.state.gameOver?"Game Completed ":'Lets play...'
+    const msg=this.state.gameOver?'You won ':'Lets play...'
     return (
-      <div>
-        {msg}
-       <p>No of Wins:{this.state.won}</p>
-
-        <div class="board-row">
-          <Box
-            handleClick={() => this.handleClick(event, 0)}
-            value={this.state.data[0]}
-            disabled={this.state.gameOver?"disabled":''}
-          />
-          <Box
-            handleClick={() => this.handleClick(event, 1)}
-            value={this.state.data[1]}
-            disabled={this.state.gameOver?"disabled":''}
-          />
-          <Box
-            handleClick={() => this.handleClick(event, 2)}
-            value={this.state.data[2]}
-            disabled={this.state.gameOver?"disabled":''}
-          />
+      <div className="container">
+        <div className="row justify-content-center text-primary" style={{padding:"10px"}}>
+          <h4>{msg}</h4>
         </div>
-        <div class="board-row">
-          <Box
-            handleClick={() => this.handleClick(event, 3)}
-            value={this.state.data[3]}
-            disabled={this.state.gameOver?"disabled":''}
-          />
-          <Box
-            handleClick={() => this.handleClick(event, 4)}
-            value={this.state.data[4]}
-            disabled={this.state.gameOver?"disabled":''}
-          />
-          <Box
-            handleClick={() => this.handleClick(event, 5)}
-            value={this.state.data[5]}
-            disabled={this.state.gameOver?"disabled":''}
-          />
+        <div style={{padding:"10px"}}>
+          <div className="row justify-content-center">
+            {this.renderBox(0)}
+            {this.renderBox(1)}
+            {this.renderBox(2)}
+          </div>
+          <div className="row justify-content-center">
+            {this.renderBox(3)}
+            {this.renderBox(4)}
+            {this.renderBox(5)}
+          </div>
+          <div className="row justify-content-center">
+            {this.renderBox(6)}
+            {this.renderBox(7)}
+            {this.renderBox(8)}
+          </div>
         </div>
-        <div class="board-row">
-          <Box
-            handleClick={() => this.handleClick(event, 6)}
-            value={this.state.data[6]}
-            disabled={this.state.gameOver?"disabled":''}
-          />
-          <Box
-            handleClick={() => this.handleClick(event, 7)}
-            value={this.state.data[7]}
-            disabled={this.state.gameOver?"disabled":''}
-          />
-          <Box
-            handleClick={() => this.handleClick(event, 8)}
-            value={this.state.data[8]}
-            disabled={this.state.gameOver?"disabled":''}
-          />
+        <div className="row justify-content-center text-success" style={{padding:"10px"}}>
+          <h4>Number of Wins: {this.state.won}</h4>
         </div>
-        <button onClick={this.handleRestart}>New Game</button>
+      
+        <div className="row justify-content-center">
+          <button className="btn btn-warning text-white font-weight-bold" onClick={this.handleRestart}>Start New Game</button>
+        </div>
       </div>
     );
   }
 }
-export default Board;
+export default SPBoard;
