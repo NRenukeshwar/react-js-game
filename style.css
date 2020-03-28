@@ -10,12 +10,12 @@
   background-color: lightskyblue;
   background-image: radial-gradient(white,lightskyblue);
   border: 1px solid white;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .board_Xbox:hover{
    color: seagreen;
-  
+  border: 1px solid white;
 }
 
 .board_Obox {
@@ -30,12 +30,12 @@
   background-color: lightskyblue;
   background-image: radial-gradient(white,lightskyblue);
   border: 1px solid white;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .board_Obox:hover{
    color: #e66465;
-  
+   border: 1px solid white;
 }
 
 .scoreBoard{
@@ -46,9 +46,4 @@
 	min-height: 100vh;
   background-color: white;
   
-  }
-
-  .hh{
-    background-color: #cad6ca;
-  background-image: radial-gradient(rgb(203, 224, 218),rgb(91, 190, 223));
-  }
+}

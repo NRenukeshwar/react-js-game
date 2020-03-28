@@ -1,6 +1,6 @@
 import React from "react";
 import Box from "./Box";
-
+import "./style.css";
 class Board extends React.Component {
   constructor() {
     super();
@@ -101,7 +101,7 @@ class Board extends React.Component {
   }
   renderBox=(index)=>{
     return(
-    <Box
+    <Box className="btn"
         handleClick={() => this.handleClick(event, index)}
         value={this.state.data[index]}
         disabled={this.state.gameOver?"disabled":''}
