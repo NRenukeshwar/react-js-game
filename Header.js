@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import {
   Collapse,
   Navbar,
@@ -10,30 +10,19 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
-class Header extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      isNavOpen: false
-    };
-  }
+function Header(){
 
-  toggleNav=()=> {
-    this.setState({
-      isNavOpen: !this.state.isNavOpen
-    });
-  }
-
-  render() {
+   const [isNavOpen, setIsNavOpen] = useState(false);
     return (
+      
       <Navbar dark expand="md" style={{background:"linear-gradient(to left,#e66465, #9198e5, seagreen)"}}>
-        <NavbarToggler onClick={this.toggleNav} />
+        <NavbarToggler onClick={isNavOpen?()=>setIsNavOpen(false):()=>setIsNavOpen(true)} />
         <NavbarBrand>
           <Link to="/" className="navbar-brand text-white">
             <h3>TicTacToe</h3>
           </Link>
         </NavbarBrand>
-        <Collapse isOpen={this.state.isNavOpen} navbar>
+        <Collapse isOpen={isNavOpen} navbar>
           <Nav navbar>
             <NavItem>
               <Link className="nav-link font-weight-bold" to="/singlePlayer">
@@ -50,6 +39,5 @@ class Header extends React.Component {
       </Navbar>
     );
   }
-}
 
 export default Header;

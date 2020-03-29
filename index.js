@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { render } from "react-dom";
 import {BrowserRouter,Route,Link,Switch} from 'react-router-dom'
 import SinglePlayer from "./SPBoard";
@@ -7,8 +7,8 @@ import Header from './Header'
 import Home from './Home';
 import "./style.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-class App extends Component {
-  render() {
+function App()
+{
     return (
     <div className="body h-100">
      
@@ -20,8 +20,7 @@ class App extends Component {
         </Switch>
       
       </div>
-    );
-  }
+    )
 }
 
 render(<BrowserRouter><App /></BrowserRouter>, document.getElementById("root"));
