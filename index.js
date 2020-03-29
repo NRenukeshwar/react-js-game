@@ -1,10 +1,10 @@
 import React from "react";
 import { render } from "react-dom";
 import {BrowserRouter,Route,Link,Switch} from 'react-router-dom'
-import SinglePlayer from "./SPBoard";
-import TwoPlayer from './TPBoard';
-import Header from './Header'
-import Home from './Home';
+import SinglePlayer from "./components/SPBoard";
+import TwoPlayer from './components/TPBoard';
+import Header from './components/Header'
+import Home from './components/Home';
 import "./style.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 function App()

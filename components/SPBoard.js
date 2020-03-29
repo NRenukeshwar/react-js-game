@@ -1,6 +1,6 @@
 import React from "react";
 import Box from "./Box";
-import "./style.css";
+import '../style.css';
 class SPBoard extends React.Component {
   constructor() {
     super();
